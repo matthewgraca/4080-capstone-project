@@ -31,8 +31,7 @@ class Order(private var items: MutableList<Item>) {
 
     private fun calculateTotal(): Int {
         var orderTotal = 0
-        val iterator = items.listIterator()
-        for (item in iterator) {
+        for (item in items) {
             orderTotal += item.getCost()
         }
         return orderTotal
