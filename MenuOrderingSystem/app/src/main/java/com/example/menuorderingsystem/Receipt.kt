@@ -6,21 +6,14 @@ enum class PayMethod {
     CREDIT
 }
 
-class Receipt {
-    var payMethod: PayMethod
-    var change: Int
-    var items: String
-    var total: Int
+class Receipt(private var payMethod: PayMethod,
+              private var total: Int,
+              amount: Int,
+              private var items: String) {
 
-    constructor(payMethod: PayMethod, total: Int, amount: Int, bill: String) {
-        this.payMethod = payMethod
-        this.change = amount - total
-        this.total = total
-        this.items = bill
-    }
+    private var change = amount - total
 
     override fun toString(): String {
-        var orderOutput = "Receipt:\n" + items + "\nPayment Method: " + payMethod + "\nCash: $"+ (change + total) + "\n" + "Change: $" + change + "\nTotal: $" + total
-        return orderOutput
+        return "Receipt:\n" + items + "\nPayment Method: " + payMethod + "\nCash: $"+ (change + total) + "\n" + "Change: $" + change + "\nTotal: $" + total
     }
 }

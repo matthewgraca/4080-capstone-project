@@ -1,10 +1,8 @@
 package com.example.menuorderingsystem
 
-class Drink : Item{
-    val size: Size
-
-    constructor(name: String, cost: Int, size: Size): super(name, cost){
-        this.size = size
+class Drink(name: String, cost: Int, private val size: Size) : Item(name, cost) {
+    fun getSize(): Size{
+        return size
     }
 }
 

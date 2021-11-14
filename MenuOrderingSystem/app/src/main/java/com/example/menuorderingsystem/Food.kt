@@ -1,10 +1,10 @@
 package com.example.menuorderingsystem
 
-class Food : Item {
-    val description: String
+class Food(name: String,
+           cost: Int,
+           private val description: String) : Item(name, cost) {
 
-    constructor(name:String, cost: Int, description: String) : super(name, cost) {
-        this.description = description
+    fun getDescription(): String{
+        return description
     }
-
 }

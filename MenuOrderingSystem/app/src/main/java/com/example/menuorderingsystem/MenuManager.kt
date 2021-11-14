@@ -1,16 +1,11 @@
 package com.example.menuorderingsystem
 
-import kotlin.collections.indexOf as indexOf1
+import kotlin.collections.*
 
-class MenuManager {
-    var menuList: Array<Menu>
-
-    constructor(menuList:Array<Menu>){
-        this.menuList = menuList
-    }
+class MenuManager(private var menuList: Array<Menu>) {
 
     fun getMenus(): Array<Menu>{
-        return menuList;
+        return menuList
     }
 
     fun addMenu(menu:Menu):Boolean{
@@ -19,8 +14,8 @@ class MenuManager {
     }
 
     fun selectMenu(selectedMenu: String) : Menu? {
-        for(i in 0..menuList.size-1){
-            if(menuList[i].getName().equals(selectedMenu)){
+        for(i in menuList.indices){
+            if(menuList[i].getName() == selectedMenu){
                 return menuList[i]
             }
         }
@@ -28,22 +23,19 @@ class MenuManager {
     }
     
     fun removeMenu(menu: Menu) :Menu? {
-        if(menuList.contains(menu)){
-            var tempMenu = menu
-            menuList.drop(menuList.indexOf1(menu))
-            return tempMenu;
-        }
-        else
-            return null
+        return if(menuList.contains(menu)) {
+            menuList.drop(menuList.indexOf(menu))
+            menu
+        } else
+            null
     }
 
     override fun toString() :String{
-        var sMenu = "Menus: "
-        for(i in 0..menuList.size-1){
-            var menuName = menuList[i]
-            sMenu = sMenu + "$menuName\n"
+        var menuString = "Menus: "
+        for(element in menuList){
+            menuString += "$element\n"
         }
-        return sMenu
+        return menuString
     }
 
 }

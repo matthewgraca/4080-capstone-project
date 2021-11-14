@@ -1,11 +1,14 @@
 package com.example.menuorderingsystem
 
-class Order {
-    var orderNumber: Int = 0
-    var items: MutableList<Item>
+class Order(private var items: MutableList<Item>) {
+    private var orderNumber = 0
 
-    constructor(items: MutableList<Item>) {
-        this.items = items
+    fun getOrderNumber(): Int{
+        return orderNumber
+    }
+
+    fun setOrderNumber(num: Int){
+        orderNumber = num
     }
 
     fun addItem(item: Item): Boolean {
@@ -26,11 +29,11 @@ class Order {
         return Receipt(PayMethod.CASH, calculateTotal(), amount, this.toString())
     }
 
-    fun calculateTotal(): Int {
+    private fun calculateTotal(): Int {
         var orderTotal = 0
-        val iterator = items.listIterator();
+        val iterator = items.listIterator()
         for (item in iterator) {
-            orderTotal += item.cost //getCost?
+            orderTotal += item.getCost()
         }
         return orderTotal
     }
@@ -38,9 +41,9 @@ class Order {
     override fun toString(): String {
         var orderOutput = "Order: "
         orderOutput = orderOutput.plus(orderNumber).plus("\n")
-        val iterator = items.listIterator();
+        val iterator = items.listIterator()
         for (item in iterator) {
-            orderOutput = orderOutput.plus(item.name).plus(": $").plus(item.cost).plus("\n") //getters not used
+            orderOutput = orderOutput.plus(item.getName()).plus(": $").plus(item.getCost()).plus("\n")
         }
         return orderOutput
     }

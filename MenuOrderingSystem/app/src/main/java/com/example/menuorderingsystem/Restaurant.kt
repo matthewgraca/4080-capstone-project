@@ -1,13 +1,18 @@
 package com.example.menuorderingsystem
 
-class Restaurant {
-    val name : String
-    val orderManager: OrderManager
-    val menuManager: MenuManager
+class Restaurant(private val name: String,
+                 private val orderManager: OrderManager,
+                 private val menuManager: MenuManager) {
 
-    constructor(name:String, orderManager: OrderManager, menuManager: MenuManager){
-        this.name = name;
-        this.orderManager = orderManager;
-        this.menuManager = menuManager;
+    fun getName(): String{
+        return name
+    }
+
+    fun getOrderManager(): OrderManager{
+        return orderManager
+    }
+
+    fun getMenuManager(): MenuManager{
+        return menuManager
     }
 }
