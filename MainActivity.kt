@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var items: ArrayList<Item>
     lateinit var rvItems: RecyclerView
     lateinit var btnFoodItem: Button
+    lateinit var btnPlaceOrder: Button
+    lateinit var btnClear: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val i1 = Item("Boba", 5)
@@ -37,7 +39,23 @@ class MainActivity : AppCompatActivity() {
             items.add(boba)
             adapter.notifyDataSetChanged();
         }
-        
+
+        btnClear = findViewById(R.id.btnClearOrder);
+        btnClear.setOnClickListener{v->
+            items.clear()
+            adapter.notifyDataSetChanged()
+        }
+
+        btnPlaceOrder = findViewById(R.id.btnPlaceOrder)
+        btnPlaceOrder.setOnClickListener{
+            //to get us rolling on linking everything idk how to implement this bad boy
+            //possibly link a table to the order and call it a day
+            val order: Order = Order(items)
+            Toast.makeText(applicationContext, "Order Placed", Toast.LENGTH_LONG).show()
+            items.clear()
+            adapter.notifyDataSetChanged()
+        }
+
 
 
     }
