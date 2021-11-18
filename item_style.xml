@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin= "5dp">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tvMenuItem"
-        android:layout_width="680dp"
-        android:layout_height="78dp"
-        android:text="OrderItem"
-        android:textSize="48sp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvItems"
+        android:layout_width="348dp"
+        android:layout_height="818dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="78dp"
+        android:scrollbars="vertical" />
 
     <Button
-        android:id="@+id/bttnAddToOrder"
-        android:layout_width="208dp"
-        android:layout_height="72dp"
+        android:id="@+id/btnFoodItem"
+        android:layout_width="150dp"
+        android:layout_height="95dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="10dp"
-        android:layout_toEndOf="@+id/tvMenuItem"
-        android:text="Add to Order"
-        android:textSize="20sp" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="704dp"
+        android:layout_marginBottom="648dp"
+        android:text="Boba" />
+
+    <Button
+        android:id="@+id/btnPlaceOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="1095dp"
+        android:layout_marginBottom="20dp"
+        android:text="Place Order" />
+
+    <Button
+        android:id="@+id/btnClearOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="973dp"
+        android:layout_marginBottom="20dp"
+        android:text="Clear" />
+</RelativeLayout>
