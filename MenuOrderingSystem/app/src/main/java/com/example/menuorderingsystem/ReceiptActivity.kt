@@ -1,0 +1,17 @@
+package com.example.menuorderingsystem
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.TextView
+
+class ReceiptActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_receipt)
+
+        val receiptTextView: TextView = findViewById(R.id.receipt_textview)
+        // TODO:get order/receipt object?
+        val order = "hello\n world"
+        receiptTextView.text = order
+    }
+}
