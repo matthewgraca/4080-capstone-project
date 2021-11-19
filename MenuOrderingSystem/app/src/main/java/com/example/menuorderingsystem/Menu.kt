@@ -1,9 +1,9 @@
 package com.example.menuorderingsystem
 
 class Menu(private var name: String,
-           private val itemList: Array<Item>) {
+           private val itemList: ArrayList<Item>) {
 
-    fun getItemList(): Array<Item>{
+    fun getItemList(): ArrayList<Item>{
         return itemList
     }
 
