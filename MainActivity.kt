@@ -1,6 +1,7 @@
 package com.example.menuorderingsystem
 
 import ItemsAdapter
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,18 +17,17 @@ class MainActivity : AppCompatActivity() {
     lateinit var btnFoodItem: Button
     lateinit var btnPlaceOrder: Button
     lateinit var btnClear: Button
+    lateinit var btnTable1: Button
+    lateinit var btnTable2: Button
+    lateinit var btnSaveOrder: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val i1 = Item("Boba", 5)
-        val i2 = Item("Tea", 3)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         rvItems = findViewById<View>(R.id.rvItems) as RecyclerView
         val m: Menu = createMenu();
         items = Item.createItemList(m)
-        items.add(i1)
-        items.add(i2)
         val adapter = ItemsAdapter(items)
         rvItems.adapter = adapter
         rvItems.layoutManager = LinearLayoutManager(this)
@@ -56,8 +56,41 @@ class MainActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
 
+        val pancakes = Item("Pancakes", 4)
+        val waffles = Item("Waffles", 4)
+        val eggs_ham_bacon = Item("Eggs Ham & Bacon", 4)
+        val orderTable1: ArrayList<Item> = arrayListOf(pancakes, waffles, eggs_ham_bacon)
 
+        val mac_cheese = Item("Mac & Cheese", 3)
+        val salad = Item("Salad", 3)
+        val onion_rings = Item("Onion Rings", 3)
+        val fries = Item("Fries", 3)
+        val orderTable2: ArrayList<Item> = arrayListOf(mac_cheese, salad, fries, onion_rings)
 
+        btnTable1= findViewById(R.id.btnTable1)
+        btnTable1.setOnClickListener {
+            items.clear()
+            items.addAll(orderTable1)
+            adapter.notifyDataSetChanged()
+        }
+        btnTable2 = findViewById(R.id.btnTable2)
+        btnTable2.setOnClickListener {
+            items.clear()
+            items.addAll(orderTable2)
+            adapter.notifyDataSetChanged()
+        }
+        //hopefully saves the items added to the order
+        btnSaveOrder = findViewById(R.id.btnSaveOrder)
+        btnSaveOrder.setOnClickListener {
+            Toast.makeText(applicationContext, "Order Saved", Toast.LENGTH_LONG).show()
+        }
+
+//        setupListRecyclerViewListener();
+
+    }
+    //when item is longclicked -- item is removed from the list
+    private fun setupListRecyclerViewListener() {
+        TODO("Not yet implemented")
     }
 
     fun createMenu():Menu{
@@ -101,5 +134,5 @@ class MainActivity : AppCompatActivity() {
         return motherOfAllMenus
     }
 
-
 }
+
