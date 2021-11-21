@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Menu Ordering System</string>
+    <string name="kitchen_text">Kitchen</string>
 </resources>
