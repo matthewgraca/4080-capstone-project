@@ -1,9 +1,10 @@
 package com.example.menuorderingsystem
 
+import java.io.Serializable
 import kotlin.Enum as KotlinEnum
 
 open class Item(private var name: String,
-                private var cost: Int) {
+                private var cost: Int) : Serializable {
 
     fun getCost(): Int {
         return cost

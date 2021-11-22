@@ -1,7 +1,9 @@
 package com.example.menuorderingsystem
 
-class Table(private var tableNumber: Int,
-            private var order: Order) {
+import java.io.Serializable
+
+class Table(private var tableNumber: Int = -1,
+            private var order: Order = Order()) : Serializable {
 
     fun getTableNumber(): Int{
         return tableNumber
