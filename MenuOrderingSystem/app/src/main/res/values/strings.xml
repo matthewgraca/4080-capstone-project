@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">Menu Ordering System</string>
     <string name="kitchen_text">Kitchen</string>
+    <string name="button7_text">7</string>
+    <string name="button8_text">8</string>
+    <string name="button9_text">9</string>
+    <string name="button10_text">10</string>
+    <string name="button11_text">11</string>
+    <string name="button2_text">2</string>
+    <string name="button1_text">1</string>
+    <string name="button5_text">5</string>
+    <string name="button4_text">4</string>
+    <string name="button3_text">3</string>
+    <string name="button12_text">12</string>
+    <string name="button13_text">13</string>
+    <string name="button14_text">14</string>
+    <string name="button15_text">15</string>
+    <string name="button16_text">16</string>
+    <string name="button6_text">6</string>
+    <string name="restrooms_text">Restrooms</string>
+    <string name="entrance_text">Entrance</string>
+    <string name="background_pic">background_pic</string>
 </resources>

@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/zee67/AndroidStudioProjects/4080-capstone-project/MenuOrderingSystem/app/src/main/res/drawable/textview_border.xml" value="0.202734375" />
         <entry key="..\:/Users/zee67/AndroidStudioProjects/4080-capstone-project/MenuOrderingSystem/app/src/main/res/layout-sw600dp/table_style.xml" value="0.14002732240437157" />
-        <entry key="..\:/Users/zee67/AndroidStudioProjects/4080-capstone-project/MenuOrderingSystem/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Users/zee67/AndroidStudioProjects/4080-capstone-project/MenuOrderingSystem/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/zee67/AndroidStudioProjects/4080-capstone-project/MenuOrderingSystem/app/src/main/res/layout/activity_table.xml" value="0.176" />
         <entry key="..\:/Users/zee67/AndroidStudioProjects/4080-capstone-project/MenuOrderingSystem/app/src/main/res/layout/activity_test2.xml" value="0.18568840579710144" />
         <entry key="..\:/Users/zee67/AndroidStudioProjects/4080-capstone-project/MenuOrderingSystem/app/src/main/res/layout/table_style.xml" value="0.18568840579710144" />
