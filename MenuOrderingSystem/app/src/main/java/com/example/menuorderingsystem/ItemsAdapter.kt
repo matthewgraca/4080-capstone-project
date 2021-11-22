@@ -1,20 +1,43 @@
-import android.content.Context
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menuorderingsystem.Item
 import com.example.menuorderingsystem.R
 
-class ItemsAdapter (private val menuItems: List<Item>): RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
+class ItemsAdapter(private val orderItems: List<Item>): RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
-    lateinit var context: Context
-    lateinit var orders :ArrayList<Item>
+    interface OnLongClickListener {
+        fun onLongClick(itemView: View, position: Int)
+    }
 
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val itemNameTextView = itemView.findViewById<TextView>(R.id.tvMenuItem)
+    lateinit var textView: TextView
+    private lateinit var listener: OnLongClickListener
+
+    fun setOnLongClickListener(listener: OnLongClickListener){
+        this.listener = listener
+    }
+
+    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView),
+        View.OnLongClickListener{
+
+        val itemNameTextView = itemView.findViewById<TextView>(R.id.tvOrderItem)
+
+        init {
+            itemView.setOnLongClickListener {
+                val position = adapterPosition
+                if(position != RecyclerView.NO_POSITION){
+                    listener.onLongClick(itemView, position)
+                }
+                return@setOnLongClickListener true
+            }
+        }
+
+        override fun onLongClick(view: View?): Boolean {
+            return true
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsAdapter.ViewHolder {
@@ -25,16 +48,14 @@ class ItemsAdapter (private val menuItems: List<Item>): RecyclerView.Adapter<Ite
     }
 
     override fun onBindViewHolder(holder: ItemsAdapter.ViewHolder, position: Int) {
-        val item: Item = menuItems.get(position)
-
+        val item: Item = orderItems.get(position)
         val textView = holder.itemNameTextView
-        textView.setText(item.getName())
-        //button to be implemeneted
-
+        textView.setText(item.name)
     }
 
     override fun getItemCount(): Int {
-        return menuItems.size
+        return orderItems.size
     }
 
 }
+
