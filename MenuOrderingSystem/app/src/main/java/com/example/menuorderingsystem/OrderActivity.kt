@@ -1,18 +1,15 @@
 package com.example.menuorderingsystem
 
-import ItemsAdapter
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity() {
+class OrderActivity : AppCompatActivity() {
 
-    lateinit var items: ArrayList<Item>
+    lateinit var items: MutableList<Item>
     lateinit var rvItems: RecyclerView
     lateinit var btnFoodItem: Button
     lateinit var btnPlaceOrder: Button
@@ -20,49 +17,30 @@ class MainActivity : AppCompatActivity() {
     lateinit var btnTable1: Button
     lateinit var btnTable2: Button
     lateinit var btnSaveOrder: Button
+    lateinit var  menuItem: ArrayList<Item>
+    lateinit var rvMenu: RecyclerView
+    lateinit var btnAdd: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
 
-        rvItems = findViewById<View>(R.id.rvItems) as RecyclerView
-        val m: Menu = createMenu();
-        items = m.getItemList() as ArrayList<Item>
-        val adapter = ItemsAdapter(items)
-        rvItems.adapter = adapter
+
+
+        rvMenu = findViewById<View>(R.id.rvMenuItems) as RecyclerView
+
+
+
         rvItems.layoutManager = LinearLayoutManager(this)
 
-        //when button clicked, add item to menu
-        btnFoodItem = findViewById(R.id.btnFoodItem);
-        btnFoodItem.setOnClickListener{
-            val boba: Item= Item("Boba", 5)
-            items.add(boba)
-            adapter.notifyDataSetChanged();
-        }
-
-        btnClear = findViewById(R.id.btnClearOrder);
-        btnClear.setOnClickListener{v->
-            items.clear()
-            adapter.notifyDataSetChanged()
-        }
-
-        btnPlaceOrder = findViewById(R.id.btnPlaceOrder)
-        btnPlaceOrder.setOnClickListener{
-            //to get us rolling on linking everything idk how to implement this bad boy
-            //possibly link a table to the order and call it a day
-            val order: Order = Order(items)
-            Toast.makeText(applicationContext, "Order Placed", Toast.LENGTH_LONG).show()
-            items.clear()
-            adapter.notifyDataSetChanged()
-        }
+        //for menu recycler view
+        val mItems: Menu = createMenu()
+        menuItem = Item.createItemList(mItems)
+        val menuAdapter = MenuAdapter(menuItem)
+        rvMenu.adapter = menuAdapter
+        rvMenu.layoutManager = LinearLayoutManager(this)
 
 
-//        setupListRecyclerViewListener();
-
-    }
-    //when item is longclicked -- item is removed from the list
-    private fun setupListRecyclerViewListener() {
-        TODO("Not yet implemented")
     }
 
     fun createMenu():Menu{
@@ -107,4 +85,3 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-

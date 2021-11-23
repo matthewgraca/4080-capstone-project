@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Matthew/AndroidStudioProjects/4080-capstone-project/MenuOrderingSystem/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Matthew/AndroidStudioProjects/4080-capstone-project/MenuOrderingSystem/app/src/main/res/layout/item_style.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Matthew/AndroidStudioProjects/4080-capstone-project/MenuOrderingSystem/app/src/main/res/layout/menu_style.xml" value="0.5541666666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.34601449275362317" />
       </map>
     </option>
