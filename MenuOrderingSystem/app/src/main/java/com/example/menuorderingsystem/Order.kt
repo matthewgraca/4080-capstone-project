@@ -23,6 +23,10 @@ class Order(private var items: MutableList<Item> = mutableListOf<Item>()) : Seri
         return true
     }
 
+    fun getItems(): MutableList<Item> {
+        return items
+    }
+
     fun isEmpty(): Boolean {
         return items.isEmpty()
     }

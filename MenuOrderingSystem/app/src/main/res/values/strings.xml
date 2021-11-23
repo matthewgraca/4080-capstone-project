@@ -20,4 +20,10 @@
     <string name="restrooms_text">Restrooms</string>
     <string name="entrance_text">Entrance</string>
     <string name="background_pic">background_pic</string>
+    <string name="receipt">Receipt</string>
+    <string name="paid">Paid</string>
+    <string name="order">Order</string>
+    <string name="update">Update</string>
+    <string name="receipt_textview">TextView</string>
+	<string name="table">Table #</string>
 </resources>
