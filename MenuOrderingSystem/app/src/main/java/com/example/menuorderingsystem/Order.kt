@@ -21,6 +21,10 @@ class Order(private var items: MutableList<Item>) {
         return true
     }
 
+    fun getItems(): MutableList<Item> {
+        return items
+    }
+
     fun isEmpty(): Boolean {
         return items.isEmpty()
     }

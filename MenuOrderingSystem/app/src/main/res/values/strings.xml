@@ -5,4 +5,5 @@
     <string name="order">Order</string>
     <string name="update">Update</string>
     <string name="receipt_textview">TextView</string>
+	<string name="table">Table #</string>
 </resources>
