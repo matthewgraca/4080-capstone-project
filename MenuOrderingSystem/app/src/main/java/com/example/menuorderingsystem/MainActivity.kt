@@ -29,75 +29,75 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
-//    fun displayTable(view: View) {
-//        var activity2Intent = Intent(this, Activity2::class.java)
-//
-//        when(view.id) {
-//            R.id.button1 -> {
-//                activity2Intent.putExtra("table", table1)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button2 -> {
-//                activity2Intent.putExtra("table", table2)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button3 -> {
-//                activity2Intent.putExtra("table", table3)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button4 -> {
-//                activity2Intent.putExtra("table", table4)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button5 -> {
-//                activity2Intent.putExtra("table", table5)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button6 -> {
-//                activity2Intent.putExtra("table", table6)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button7 -> {
-//                activity2Intent.putExtra("table", table7)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button8 -> {
-//                activity2Intent.putExtra("table", table8)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button9 -> {
-//                activity2Intent.putExtra("table", table9)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button10 -> {
-//                activity2Intent.putExtra("table", table10)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button11 -> {
-//                activity2Intent.putExtra("table", table11)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button12 -> {
-//                activity2Intent.putExtra("table", table12)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button13 -> {
-//                activity2Intent.putExtra("table", table13)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button14 -> {
-//                activity2Intent.putExtra("table", table14)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button15 -> {
-//                activity2Intent.putExtra("table", table15)
-//                startActivity(activity2Intent)
-//            }
-//            R.id.button16 -> {
-//                activity2Intent.putExtra("table", table16)
-//                startActivity(activity2Intent)
-//            }
-//        }
-//
-//    }
+    fun displayTable(view: View) {
+        var activity2Intent = Intent(this, OrderActivity::class.java)
+
+        when(view.id) {
+            R.id.button1 -> {
+                activity2Intent.putExtra("table", table1)
+                startActivity(activity2Intent)
+            }
+            R.id.button2 -> {
+                activity2Intent.putExtra("table", table2)
+                startActivity(activity2Intent)
+            }
+            R.id.button3 -> {
+                activity2Intent.putExtra("table", table3)
+                startActivity(activity2Intent)
+            }
+            R.id.button4 -> {
+                activity2Intent.putExtra("table", table4)
+                startActivity(activity2Intent)
+            }
+            R.id.button5 -> {
+                activity2Intent.putExtra("table", table5)
+                startActivity(activity2Intent)
+            }
+            R.id.button6 -> {
+                activity2Intent.putExtra("table", table6)
+                startActivity(activity2Intent)
+            }
+            R.id.button7 -> {
+                activity2Intent.putExtra("table", table7)
+                startActivity(activity2Intent)
+            }
+            R.id.button8 -> {
+                activity2Intent.putExtra("table", table8)
+                startActivity(activity2Intent)
+            }
+            R.id.button9 -> {
+                activity2Intent.putExtra("table", table9)
+                startActivity(activity2Intent)
+            }
+            R.id.button10 -> {
+                activity2Intent.putExtra("table", table10)
+                startActivity(activity2Intent)
+            }
+            R.id.button11 -> {
+                activity2Intent.putExtra("table", table11)
+                startActivity(activity2Intent)
+            }
+            R.id.button12 -> {
+                activity2Intent.putExtra("table", table12)
+                startActivity(activity2Intent)
+            }
+            R.id.button13 -> {
+                activity2Intent.putExtra("table", table13)
+                startActivity(activity2Intent)
+            }
+            R.id.button14 -> {
+                activity2Intent.putExtra("table", table14)
+                startActivity(activity2Intent)
+            }
+            R.id.button15 -> {
+                activity2Intent.putExtra("table", table15)
+                startActivity(activity2Intent)
+            }
+            R.id.button16 -> {
+                activity2Intent.putExtra("table", table16)
+                startActivity(activity2Intent)
+            }
+        }
+
+    }
 }
