@@ -1,6 +1,8 @@
 package com.example.menuorderingsystem
 
-enum class PayMethod {
+import java.io.Serializable
+
+enum class PayMethod : Serializable {
     CASH,
     DEBIT,
     CREDIT
@@ -9,7 +11,7 @@ enum class PayMethod {
 class Receipt(private var payMethod: PayMethod,
               private var total: Int,
               amount: Int,
-              private var items: String) {
+              private var items: String) : Serializable {
 
     private var change = amount - total
 

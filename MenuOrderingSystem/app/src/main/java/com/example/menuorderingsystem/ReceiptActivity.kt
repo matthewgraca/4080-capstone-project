@@ -9,9 +9,9 @@ class ReceiptActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_receipt)
 
+        val receipt: Receipt = intent.getSerializableExtra("receipt") as Receipt
+
         val receiptTextView: TextView = findViewById(R.id.receipt_textview)
-        // TODO:get order/receipt object?
-        val order = "hello\n world"
-        receiptTextView.text = order
+        receiptTextView.text = receipt.toString()
     }
 }

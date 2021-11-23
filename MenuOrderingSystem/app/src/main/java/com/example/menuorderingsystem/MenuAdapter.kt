@@ -14,6 +14,7 @@ class MenuAdapter (private val menuItems: List<Item>): RecyclerView.Adapter<Menu
     }
 
     lateinit var textView: TextView
+    lateinit var buttonView: Button
 
     inner class ViewHolder(menuItem: View): RecyclerView.ViewHolder(menuItem){
 //        fun bind(item: Item) {
@@ -21,6 +22,7 @@ class MenuAdapter (private val menuItems: List<Item>): RecyclerView.Adapter<Menu
 //        }
 
         val menuItemTextView = menuItem.findViewById<TextView>(R.id.tvItemMenu)
+        val buttonTextView = menuItem.findViewById<Button>(R.id.btnAddToOrder)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,7 +35,18 @@ class MenuAdapter (private val menuItems: List<Item>): RecyclerView.Adapter<Menu
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: Item = menuItems.get(position)
         textView = holder.menuItemTextView
-        textView.setText(item.name)
+        when(item){
+            is Food -> {
+                textView.text = "$${item.getCost()} - ${item.getDescription()}"
+            }
+            else -> {
+                textView.text = "$${item.getCost()}"
+            }
+        }
+        buttonView = holder.buttonTextView
+        buttonView.text = item.getName()
+
+
 //        holder.bind(item)
     }
 

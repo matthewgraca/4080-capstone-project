@@ -13,7 +13,7 @@ class Menu {
 
     fun selectItem(item: String): Item? {
         for(i in 0..itemList.size-1){
-            if(itemList[i].name == item)
+            if(itemList[i].getName() == item)
                 return itemList[i]
         }
         return null
@@ -51,8 +51,8 @@ class Menu {
         items = "\n$name: \n"
         if(itemList.size > 0) {
             for (i in 0..itemList.size-1) {
-                val itemName = itemList[i].name
-                val itemCost = itemList[i].cost
+                val itemName = itemList[i].getName()
+                val itemCost = itemList[i].getCost()
 
                 items = items + ("$itemName: $$itemCost\n")
             }
