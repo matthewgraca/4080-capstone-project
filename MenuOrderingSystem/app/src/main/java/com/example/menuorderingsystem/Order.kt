@@ -2,7 +2,7 @@ package com.example.menuorderingsystem
 
 import java.io.Serializable
 
-class Order(private var items: MutableList<Item> = mutableListOf<Item>()) : Serializable  {
+class Order(private var items: MutableList<Item> = mutableListOf()) : Serializable  {
     private var orderNumber = 0
 
     fun getOrderNumber(): Int{

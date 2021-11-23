@@ -1,5 +1,8 @@
 package com.example.menuorderingsystem
-class OrderManager(private var orderList: MutableList<Order>) {
+
+import java.io.Serializable
+
+class OrderManager(private var orderList: MutableList<Order> = mutableListOf()) : Serializable {
 
     fun getOrder(): MutableList<Order>{
         return orderList

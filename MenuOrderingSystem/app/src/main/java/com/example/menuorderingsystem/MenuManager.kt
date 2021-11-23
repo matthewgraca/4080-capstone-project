@@ -1,8 +1,9 @@
 package com.example.menuorderingsystem
 
+import java.io.Serializable
 import kotlin.collections.*
 
-class MenuManager(private var menuList: Array<Menu>) {
+class MenuManager(private var menuList: Array<Menu>) : Serializable {
 
     fun getMenus(): Array<Menu>{
         return menuList

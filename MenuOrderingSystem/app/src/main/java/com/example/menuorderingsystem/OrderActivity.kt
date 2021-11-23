@@ -1,15 +1,14 @@
 package com.example.menuorderingsystem
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
@@ -25,6 +24,8 @@ class OrderActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     lateinit var mItems: Menu
     lateinit var rIntent: Intent
     lateinit var orderButton: Button
+    lateinit var restaurant: Restaurant
+    private var newItems: ArrayList<Item> = ArrayList<Item>()
 
 
 
@@ -38,6 +39,7 @@ class OrderActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         navView.setNavigationItemSelectedListener(this)
         navView.getHeaderView(R.id.textView)
 
+        restaurant = intent.getSerializableExtra("restaurant") as Restaurant
         tables = intent.getSerializableExtra("tableArray") as ArrayList<Table>
         tableNum = intent.getSerializableExtra("tableNum") as Int
         currentTable = tables[tableNum]
@@ -47,6 +49,8 @@ class OrderActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         textView!!.text = "Table #${tableNum+1}"
 
         orderButton = findViewById(R.id.order_button)
+        if(!currentTable.getOrder().isEmpty())
+            orderButton.text = getString(R.string.update)
 
 
         val receiptButton: Button = findViewById(R.id.receipt_button)
@@ -59,29 +63,37 @@ class OrderActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             toast.show()
             currentTable.setOrder(Order())
             tables[tableNum] = currentTable
+            navView.menu.clear()
             //finish()
         }
 
         // order button functionality
         orderButton.setOnClickListener{
 
-            tables[tableNum] = currentTable
+            if(orderButton.text == getString(R.string.update) ){
+                updateOrder()
+            }
+            else{
+                for(i in newItems){
+                    currentTable.getOrder().addItem(i)
+                }
+                newItems.clear()
+                restaurant.getOrderManager().addOrder(currentTable.getOrder())
+            }
 
             // display order sent msg
-            val toast = Toast.makeText(this, "Order Sent!", Toast.LENGTH_SHORT)
+            val toast: Toast = Toast.makeText(this, "Order Sent!", Toast.LENGTH_SHORT)
             toast.show()
+
             // disable button when order is sent
             orderButton.isEnabled = false
-            // TODO:detect change in order (that's handled outside this block when list is updated)
-            /* on their end: like if orderButton.text == update, then orderButton.isEnabled == true*/
-            // change button to "update" when ordered
             orderButton.text = getString(R.string.update)
         }
 
         // receipt button functionality
         receiptButton.setOnClickListener{
             // move to receipt activity to handle the receipt
-            val receipt: Receipt = currentTable.getOrder().generateReceipt(100)
+            val receipt: Receipt = currentTable.getOrder().generateReceipt(300)
 
             val intent = Intent(this, ReceiptActivity::class.java)
             intent.putExtra("receipt", receipt)
@@ -94,13 +106,14 @@ class OrderActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         //for menu recycler view
         mItems = createMenu()
         menuItem = Item.createItemList(mItems)
-        val menuAdapter = MenuAdapter(menuItem)
+        val menuAdapter = MenuAdapter(menuItem, false)
         rvMenu.adapter = menuAdapter
         rvMenu.layoutManager = LinearLayoutManager(this)
 
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        rvMenu.layoutManager = GridLayoutManager(this, 4)
         if(item.groupId == R.id.order_list){
             navView.menu.removeItem(item.itemId)
             return true
@@ -121,64 +134,71 @@ class OrderActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         val button: Button = view as Button
 
         val selected = button.text
-        var item = mItems.selectItem(selected as String)
+        val item = mItems.selectItem(selected as String)
 
+        newItems.add(item!!)
 
-        var order = currentTable.getOrder()
-
-        order.addItem(item!!)
-
-
-        var itemView: MenuItem = navView.menu.add(R.id.order_list, order.getItems().size, 0, item.getName())
+        val itemView: MenuItem = navView.menu.add(R.id.order_list, navView.menu.size(), 0, item.getName())
         itemView.isCheckable = true
 
         orderButton.isEnabled = true
     }
 
+    private fun updateOrder(){
+        if(newItems.isEmpty())
+            return
+
+        val orders = restaurant.getOrderManager().getOrder()
+        val oldOrder = currentTable.getOrder()
+        for(i in orders){
+            println(i)
+            if(i.getOrderNumber() == oldOrder.getOrderNumber()){
+                for(j in newItems){
+                    i.addItem(j)
+                    currentTable.getOrder().addItem(j)
+                }
+                break
+            }
+        }
+
+        newItems.clear()
+        tables[tableNum] = currentTable
+    }
+
     override fun onBackPressed() {
+        updateOrder()
         rIntent.putExtra("tables", tables)
+        rIntent.putExtra("nRestaurant", restaurant)
         startActivity(rIntent)
     }
 
+    fun layoutSwitch(view: View){
+        val button = view as Button
 
-    fun createMenu():Menu{
-        //Breakfast items
-        val pancakes = Food("Pancakes", 4, "3 pancakes stacked on top of each other with a side of butter and a choice of toppings strawberries/ chocolate chips / cherries")
-        val waffles = Food("Waffles", 4, "1 waffle topped with whipped cream and a choice of toppings strawberry/choccolate chips / cherries")
-        val eggs_ham_bacon = Food("Eggs Ham & Bacon", 4, " A plate filled with eggs (choice of scrambled or sunny side-up), bacon, and ham with a side of roasted potatoes or hash browns")
-
-        //Lunch Foods
-        val c_burger = Food("Cheeseburger", 10, "A juicy all-beef burger classic with american cheese, lettuce, tomato, onion, and pickles on a Brioche bun.")
-        val sandwich = Food("Sandwich", 7, "Turkey, ham, american cheese, lettuce, tomato, and mayonnaise on wheat bread.")
-        val pizza = Food("Pizza", 9, "Garlic oil sauce, ricotta & Mozzarella cheese, tomatoes and basil")
-
-        //Dinner Items
-        val steak = Food("Steak", 16, "Pan-seared steak with garlic butter is seared and caramelized on the outside and juicy inside")
-        val enchiladas = Food("Enchiladas", 10, "Flour tortilla rolled around choice of chicken or beef with a savory sauce")
-        val tacos = Food("Tacos", 9, "Six Corn tortillas topped with choice of chicken, beef, or fish")
-        val lasagna = Food("Lasagna", 10, "With basil, sausage, ground beef and three types of cheese")
-
-        //Sides/Appetizers
-        val mac_cheese = Food("Mac & Cheese", 3, "Macaroni, butter, milk with cheddar and parmesan cheese")
-        val salad = Food("Salad", 3, "Lettuce, tomato, cucumber, carrot served with ranch dressing")
-        val onion_rings = Food("Onion Rings", 3, "Deep fried onions")
-        val fries = Food("Fries", 3, "Crispy fries, light sea salt")
+        when(button.text){
+            "Linear" -> {
+                rvMenu.adapter = MenuAdapter(menuItem, false)
+                rvMenu.layoutManager = LinearLayoutManager(this)
+                button.text = "Grid"
+            }
+            "Grid" -> {
+                rvMenu.adapter = MenuAdapter(menuItem, true)
+                rvMenu.layoutManager = GridLayoutManager(this, 4)
+                button.text = "Linear"
+            }
+        }
+    }
 
 
-        //Drinks
-        val water: Item = Drink("Water", 0, Size.MEDIUM)
-        val dr_pepper: Item = Drink("Dr Pepper", 3, Size.MEDIUM)
-        val coca_cola: Item = Drink("Coca Cola", 3, Size.MEDIUM)
-        var root_beer: Item = Drink("Root Beer", 3, Size.MEDIUM)
-        val sprite: Item = Drink("Sprite", 3, Size.MEDIUM)
+    private fun createMenu(): Menu {
 
-
-        val menuWithEverything = arrayListOf(pancakes, waffles, eggs_ham_bacon,
-            c_burger, sandwich, pizza,
-            steak, enchiladas, tacos, lasagna,
-            mac_cheese, salad, onion_rings, fries,
-            water, dr_pepper, coca_cola, root_beer, sprite)
-        val motherOfAllMenus: Menu = Menu("Menu with all Item", menuWithEverything)
-        return motherOfAllMenus
+        val menus = restaurant.getMenuManager().getMenus()
+        var menuWithEverything = ArrayList<Item>()
+        for (i in menus) {
+            for (j in i.itemList) {
+                menuWithEverything.add(j)
+            }
+        }
+        return Menu("Menu with all Item", menuWithEverything)
     }
 }

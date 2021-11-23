@@ -1,6 +1,8 @@
 package com.example.menuorderingsystem
 
-class Menu {
+import java.io.Serializable
+
+class Menu : Serializable {
     
     var name: String
     val itemList: ArrayList<Item>

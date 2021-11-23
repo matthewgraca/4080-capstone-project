@@ -1,6 +1,8 @@
 package com.example.menuorderingsystem
 
-class Drink(name: String, cost: Int, private val size: Size) : Item(name, cost) {
+import java.io.Serializable
+
+class Drink(name: String, cost: Int, private val size: Size) : Item(name, cost), Serializable {
     fun getSize(): Size{
         return size
     }

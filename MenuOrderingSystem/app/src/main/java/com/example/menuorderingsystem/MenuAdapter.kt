@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MenuAdapter (private val menuItems: List<Item>): RecyclerView.Adapter<MenuAdapter.ViewHolder>() {
+class MenuAdapter (private val menuItems: List<Item>, private val grid: Boolean): RecyclerView.Adapter<MenuAdapter.ViewHolder>() {
 
     interface OnClickListener{
         fun onItemClicked(pos: Int)
@@ -17,9 +17,6 @@ class MenuAdapter (private val menuItems: List<Item>): RecyclerView.Adapter<Menu
     lateinit var buttonView: Button
 
     inner class ViewHolder(menuItem: View): RecyclerView.ViewHolder(menuItem){
-//        fun bind(item: Item) {
-//            textView.setText(menuItems.get(adapterPosition).getName())
-//        }
 
         val menuItemTextView = menuItem.findViewById<TextView>(R.id.tvItemMenu)
         val buttonTextView = menuItem.findViewById<Button>(R.id.btnAddToOrder)
@@ -35,19 +32,22 @@ class MenuAdapter (private val menuItems: List<Item>): RecyclerView.Adapter<Menu
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: Item = menuItems.get(position)
         textView = holder.menuItemTextView
-        when(item){
-            is Food -> {
-                textView.text = "$${item.getCost()} - ${item.getDescription()}"
+        if(!grid){
+            when(item){
+                is Food -> {
+                    textView.text = "$${item.getCost()} - ${item.getDescription()}"
+                }
+                else -> {
+                    textView.text = "$${item.getCost()}"
+                }
             }
-            else -> {
-                textView.text = "$${item.getCost()}"
-            }
+        }
+        else{
+            textView.text = ""
         }
         buttonView = holder.buttonTextView
         buttonView.text = item.getName()
 
-
-//        holder.bind(item)
     }
 
     override fun getItemCount(): Int {
