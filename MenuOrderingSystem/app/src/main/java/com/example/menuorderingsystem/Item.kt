@@ -28,4 +28,10 @@ open class Item(private var name: String,
         return "$name: $$cost"
     }
 
+    companion object{
+        fun createItemList(menuList: Menu): ArrayList<Item>{
+            val itemList = menuList.getItems()
+            return itemList
+        }
+    }
 }
